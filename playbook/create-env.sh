@@ -11,8 +11,8 @@ sleep 2
 echo 'Start docker container'
 
 docker run --name ubuntu -d pycontribs/ubuntu:latest sleep 6000000
-docker run --name centos8 -d pycontribs/centos:8  sleep 6000000
-docker run --name fedora -d pycontribs/fedora:latest sleep 6000000
+docker run --name centos8 -d pycontribs/centos:8 sleep 6000000
+docker run --name fedora -d pycontribs/fedora:latest sleep 60000000
 
 sleep 2 
 
