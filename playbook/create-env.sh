@@ -1,10 +1,10 @@
-cat ./create-env.sh 
 #!/bin/bash
 
 echo 'Get images'
 
 docker pull pycontribs/ubuntu:latest
 docker pull pycontribs/centos:8
+docker pull pycontribs/fedora:latest
 
 sleep 2
 
@@ -12,6 +12,7 @@ echo 'Start docker container'
 
 docker run --name ubuntu -d pycontribs/ubuntu:latest sleep 6000000
 docker run --name centos8 -d pycontribs/centos:8  sleep 6000000
+docker run --name fedora -d pycontribs/fedora:latest sleep 6000000
 
 sleep 2 
 

@@ -330,8 +330,120 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 
 1. При помощи `ansible-vault` расшифруйте все зашифрованные файлы с переменными.
 2. Зашифруйте отдельное значение `PaSSw0rd` для переменной `some_fact` паролем `netology`. Добавьте полученное значение в `group_vars/all/exmp.yml`.
+
+```bash
+iva@c8n:~/8x/playbook $ ansible-vault encrypt group_vars/all/examp.yml 
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the controller starting with Ansible 2.12. Current version: 3.6.8 (default, Mar 25 2022, 11:15:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-10)]. 
+This feature will be removed from ansible-core in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+New Vault password: 
+Confirm New Vault password: 
+Encryption successful
+
+```
+
 3. Запустите `playbook`, убедитесь, что для нужных хостов применился новый `fact`.
+
+```bash
+play ansible
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the controller starting with Ansible 2.12. Current version: 3.6.8 (default, Mar 25 2022, 11:15:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-10)]. 
+This feature will be removed from ansible-core in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+Vault password: 
+
+PLAY [Print os facts] *********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [localhost]
+ok: [centos8]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host ubuntu should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible release will 
+default to using the discovered platform python for this host. See https://docs.ansible.com/ansible-core/2.11/reference_appendices/interpreter_discovery.html for more information. This feature will be removed 
+in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [ubuntu]
+
+TASK [Print OS] ***************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "CentOS"
+}
+ok: [centos8] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+
+TASK [Print fact] *************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "PaSSw0rd"
+}
+ok: [centos8] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+centos8                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+
+
 4. Добавьте новую группу хостов `fedora`, самостоятельно придумайте для неё переменную. В качестве образа можно использовать [этот](https://hub.docker.com/r/pycontribs/fedora).
+
+```bash
+play ansible
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the controller starting with Ansible 2.12. Current version: 3.6.8 (default, Mar 25 2022, 11:15:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-10)]. 
+This feature will be removed from ansible-core in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+Vault password: 
+
+PLAY [Print os facts] *********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************************************************************************************************************
+ok: [localhost]
+ok: [centos8]
+ok: [fedora]
+[DEPRECATION WARNING]: Distribution Ubuntu 18.04 on host ubuntu should use /usr/bin/python3, but is using /usr/bin/python for backward compatibility with prior Ansible releases. A future Ansible release will 
+default to using the discovered platform python for this host. See https://docs.ansible.com/ansible-core/2.11/reference_appendices/interpreter_discovery.html for more information. This feature will be removed 
+in version 2.12. Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ok: [ubuntu]
+
+TASK [Print OS] ***************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "CentOS"
+}
+ok: [ubuntu] => {
+    "msg": "Ubuntu"
+}
+ok: [centos8] => {
+    "msg": "CentOS"
+}
+ok: [fedora] => {
+    "msg": "Fedora"
+}
+
+TASK [Print fact] *************************************************************************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "PaSSw0rd"
+}
+ok: [centos8] => {
+    "msg": "el default fact"
+}
+ok: [ubuntu] => {
+    "msg": "deb default fact"
+}
+ok: [fedora] => {
+    "msg": "fed default fact"
+}
+
+PLAY RECAP ********************************************************************************************************************************************************************************************************
+centos8                    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+fedora                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
+
 5. Напишите скрипт на bash: автоматизируйте поднятие необходимых контейнеров, запуск ansible-playbook и остановку контейнеров.
 6. Все изменения должны быть зафиксированы и отправлены в вашей личный репозиторий.
 
