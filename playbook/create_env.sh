@@ -1,22 +1,27 @@
+cat ./create-env.sh 
 #!/bin/bash
 
-docker pull pycontribs/fedora
-docker pull pycontribs/ubuntu
-docker pull pycontribs/centos:7
+echo 'Get images'
+
+docker pull pycontribs/ubuntu:latest
+docker pull pycontribs/centos:8
 
 sleep 2
 
-docker run --name fedora -d pycontribs/fedora:latest sleep 6000000
+echo 'Start docker container'
+
 docker run --name ubuntu -d pycontribs/ubuntu:latest sleep 6000000
-docker run --name centos7 -d pycontribs/centos:7  sleep 6000000
+docker run --name centos8 -d pycontribs/centos:8  sleep 6000000
 
 sleep 2 
 
-ansible-playbook site.yml -i inventory/prod.yml
+echo 'play ansible'
 
-sleep 2 
+ansible-playbook site.yml -i inventory/prod.yml --ask-vault-password
 
-docker rm fedora -f
-docker rm ubuntu -f 
-docker rm centos7 -f 
 
+sleep 10 
+echo 'remove containers'
+
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
