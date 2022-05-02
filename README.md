@@ -2,6 +2,24 @@
 
 ## Подготовка к выполнению
 1. Установите ansible версии 2.10 или выше.
+
+```bash
+ iva@c8n:~/8x/playbook $ ansible --version
+[DEPRECATION WARNING]: Ansible will require Python 3.8 or newer on the controller starting with Ansible 2.12. Current version: 3.6.8 (default, Mar 25 2022, 11:15:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-10)]. This feature will be removed from ansible-core in version 2.12. 
+Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+ansible [core 2.11.7] 
+  config file = None
+  configured module search path = ['/home/iva/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/iva/.local/lib/python3.6/site-packages/ansible
+  ansible collection location = /home/iva/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/iva/.local/bin/ansible
+  python version = 3.6.8 (default, Mar 25 2022, 11:15:52) [GCC 8.5.0 20210514 (Red Hat 8.5.0-10)]
+  jinja version = 3.0.3
+  libyaml = True
+iva@c8n:~/8x/playbook $ 
+
+```
+
 2. Создайте свой собственный публичный репозиторий на github с произвольным именем.
 3. Скачайте [playbook](./playbook/) из репозитория с домашним заданием и перенесите его в свой репозиторий.
 
