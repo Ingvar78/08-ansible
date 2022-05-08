@@ -21,7 +21,7 @@
  - Подключаемся к хосту и создаём необходимого пользователся с соответствующими правами
 
 iva@c9:~/Documents/08-ansible/08-2  (08.2 *)$ ssh iva@192.168.1.41
-[iva@c8a1 iva]# sudo adduser ansible
+[iva@c8a1 ~]$ sudo useradd ansible
 [iva@c8a1 ~]$ sudo passwd ansible
 Changing password for user ansible.
 New password: 
@@ -30,7 +30,7 @@ passwd: all authentication tokens updated successfully.
 [iva@c8a1 ~]$ sudo usermod -aG wheel ansible
 
 
- - Разрешаем повышение роли без ввода пароля
+ - Разрешаем повышение роли без ввода пароля предварительно переподключившись под вновь созданным пользователем
 
 iva@c9:~/Documents/08-ansible/08-2  (08.2 *)$ ssh ansible@192.168.1.41
 ansible@192.168.1.41's password: 
