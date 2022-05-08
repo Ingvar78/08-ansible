@@ -1,0 +1,365 @@
+ansible-playbook [core 2.12.4]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/home/iva/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/iva/.local/lib/python3.9/site-packages/ansible
+  ansible collection location = /home/iva/.ansible/collections:/usr/share/ansible/collections
+  executable location = /home/iva/.local/bin/ansible-playbook
+  python version = 3.9.10 (main, Feb  9 2022, 00:00:00) [GCC 11.2.1 20220127 (Red Hat 11.2.1-9)]
+  jinja version = 3.1.1
+  libyaml = True
+Using /etc/ansible/ansible.cfg as config file
+host_list declined parsing /home/iva/Documents/08-ansible/08-2/inventory/prod.yml as it did not pass its verify_file() method
+script declined parsing /home/iva/Documents/08-ansible/08-2/inventory/prod.yml as it did not pass its verify_file() method
+Parsed /home/iva/Documents/08-ansible/08-2/inventory/prod.yml inventory source with yaml plugin
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: site.yml *************************************************************
+2 plays in site.yml
+
+PLAY [Install Clickhouse] ******************************************************
+
+TASK [Gathering Facts] *********************************************************
+task path: /home/iva/Documents/08-ansible/08-2/site.yml:2
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221 `" && echo ansible-tmp-1652047583.7425342-83204-213502609867221="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047583.7425342-83204-213502609867221=/home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221\n', b'')
+<clickhouse-01> Attempting python interpreter discovery
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo PLATFORM; uname; echo FOUND; command -v '"'"'"'"'"'"'"'"'python3.10'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.9'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.8'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.7'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.6'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python3.5'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/bin/python3'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/libexec/platform-python'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python2.7'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python2.6'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'/usr/bin/python'"'"'"'"'"'"'"'"'; command -v '"'"'"'"'"'"'"'"'python'"'"'"'"'"'"'"'"'; echo ENDFOUND && sleep 0'"'"''
+<192.168.1.41> (0, b'PLATFORM\nLinux\nFOUND\n/usr/libexec/platform-python\nENDFOUND\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python && sleep 0'"'"''
+<192.168.1.41> (0, b'{"platform_dist_result": ["centos", "8", ""], "osrelease_content": "NAME=\\"CentOS Stream\\"\\nVERSION=\\"8\\"\\nID=\\"centos\\"\\nID_LIKE=\\"rhel fedora\\"\\nVERSION_ID=\\"8\\"\\nPLATFORM_ID=\\"platform:el8\\"\\nPRETTY_NAME=\\"CentOS Stream 8\\"\\nANSI_COLOR=\\"0;31\\"\\nCPE_NAME=\\"cpe:/o:centos:centos:8\\"\\nHOME_URL=\\"https://centos.org/\\"\\nBUG_REPORT_URL=\\"https://bugzilla.redhat.com/\\"\\nREDHAT_SUPPORT_PRODUCT=\\"Red Hat Enterprise Linux 8\\"\\nREDHAT_SUPPORT_PRODUCT_VERSION=\\"CentOS Stream\\"\\n"}\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/setup.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpsz5uywup TO /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/AnsiballZ_setup.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpsz5uywup /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/AnsiballZ_setup.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/ /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/AnsiballZ_setup.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/AnsiballZ_setup.py && sleep 0'"'"''
+<192.168.1.41> (0, b'\r\n{"ansible_facts": {"ansible_distribution": "CentOS", "ansible_distribution_release": "Stream", "ansible_distribution_version": "8", "ansible_distribution_major_version": "8", "ansible_distribution_file_path": "/etc/centos-release", "ansible_distribution_file_variety": "CentOS", "ansible_distribution_file_parsed": true, "ansible_os_family": "RedHat", "ansible_local": {}, "ansible_virtualization_role": "guest", "ansible_virtualization_type": "VMware", "ansible_virtualization_tech_guest": ["VMware"], "ansible_virtualization_tech_host": [], "ansible_user_id": "iva", "ansible_user_uid": 1000, "ansible_user_gid": 1000, "ansible_user_gecos": "Igor V", "ansible_user_dir": "/home/iva", "ansible_user_shell": "/bin/bash", "ansible_real_user_id": 1000, "ansible_effective_user_id": 1000, "ansible_real_group_id": 1000, "ansible_effective_group_id": 1000, "ansible_fips": false, "ansible_system": "Linux", "ansible_kernel": "4.18.0-383.el8.x86_64", "ansible_kernel_version": "#1 SMP Wed Apr 20 15:38:08 UTC 2022", "ansible_machine": "x86_64", "ansible_python_version": "3.6.8", "ansible_fqdn": "c8a1.eger", "ansible_hostname": "c8a1", "ansible_nodename": "c8a1.eger", "ansible_domain": "eger", "ansible_userspace_bits": "64", "ansible_architecture": "x86_64", "ansible_userspace_architecture": "x86_64", "ansible_machine_id": "e58dae05117b42e4940fa3da01b5d4f3", "ansible_ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABgQDd/TdR9qt332xgkO0snE3VZWunXFhC4qRUz57jUwpJw39g9OAqUWNd+Uy9Cr27XwhwR06NiLB8Wt042JSpffGZSFeKd9uqBaECnEErtoZblu0hVSwUdNH2td3C3j47iaOqNhrTHtwe2DZJN+qksw48n10FMWdG3HuAHNo4Tb2T2GGGHrARmuKOX2TwwmgDiRGM/eyy3BDUSmYRhDuZQ+kyT2gdxuxU04xh87lf55NakVBTfB5FdvhHLPeAYaQeEF/DmX6NQRIAjkCC324aUI4Wa6Ep4fpBezUeYud7EoD0qPTBYRthP5g2xA16zzYuWZG89zD8WaN4X8h904reyS+Ov0TuvvdZsirwAclPmcO8zcCtZmIw1FXdTsRqhe0gEpPyJb9EIuHtDllAJOFN6rma9y8ggs20kklSEgLRtGbY48zFnlgTacyknSuTZPF8n5eBaD9pXy7hGlapCIKAxr907Gs8RnT79mY1qxrTIJ+18fhAzkbp8/puaXO9/+uA8kk=", "ansible_ssh_host_key_rsa_public_keytype": "ssh-rsa", "ansible_ssh_host_key_ecdsa_public": "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDhucvAayEGbf0OLtHHSCEcx6qPJYsZIsfi7ojuRQGY7ReVs7UgfnB2Tc81fifv/Et/91/lXSE8D8bpEDCC71OE=", "ansible_ssh_host_key_ecdsa_public_keytype": "ecdsa-sha2-nistp256", "ansible_ssh_host_key_ed25519_public": "AAAAC3NzaC1lZDI1NTE5AAAAIPCNHuLawtFRo+4S4cITvdTuCqTGuztl19ohuTIb7dUe", "ansible_ssh_host_key_ed25519_public_keytype": "ssh-ed25519", "ansible_iscsi_iqn": "", "ansible_dns": {"search": ["eger"], "nameservers": ["192.168.1.1"]}, "ansible_lsb": {}, "ansible_system_capabilities_enforced": "True", "ansible_system_capabilities": [""], "ansible_is_chroot": false, "ansible_python": {"version": {"major": 3, "minor": 6, "micro": 8, "releaselevel": "final", "serial": 0}, "version_info": [3, 6, 8, "final", 0], "executable": "/usr/libexec/platform-python", "has_sslcontext": true, "type": "cpython"}, "ansible_date_time": {"year": "2022", "month": "05", "weekday": "Monday", "weekday_number": "1", "weeknumber": "19", "day": "09", "hour": "01", "minute": "06", "second": "17", "epoch": "1652047577", "epoch_int": "1652047577", "date": "2022-05-09", "time": "01:06:17", "iso8601_micro": "2022-05-08T22:06:17.525736Z", "iso8601": "2022-05-08T22:06:17Z", "iso8601_basic": "20220509T010617525736", "iso8601_basic_short": "20220509T010617", "tz": "MSK", "tz_dst": "MSK", "tz_offset": "+0300"}, "ansible_apparmor": {"status": "disabled"}, "ansible_hostnqn": "", "ansible_fibre_channel_wwn": [], "ansible_selinux_python_present": true, "ansible_selinux": {"status": "enabled", "policyvers": 33, "config_mode": "enforcing", "mode": "enforcing", "type": "targeted"}, "ansible_cmdline": {"BOOT_IMAGE": "(hd0,gpt2)/vmlinuz-4.18.0-383.el8.x86_64", "root": "/dev/mapper/cs-root", "ro": true, "resume": "/dev/mapper/cs-swap", "rd.lvm.lv": "cs/swap", "rhgb": true, "quiet": true}, "ansible_proc_cmdline": {"BOOT_IMAGE": "(hd0,gpt2)/vmlinuz-4.18.0-383.el8.x86_64", "root": "/dev/mapper/cs-root", "ro": true, "resume": "/dev/mapper/cs-swap", "rd.lvm.lv": ["cs/root", "cs/swap"], "rhgb": true, "quiet": true}, "ansible_env": {"LS_COLORS": "rs=0:di=38;5;33:ln=38;5;51:mh=00:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=01;05;37;41:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;40:*.tar=38;5;9:*.tgz=38;5;9:*.arc=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lha=38;5;9:*.lz4=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.tzo=38;5;9:*.t7z=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lrz=38;5;9:*.lz=38;5;9:*.lzo=38;5;9:*.xz=38;5;9:*.zst=38;5;9:*.tzst=38;5;9:*.bz2=38;5;9:*.bz=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.war=38;5;9:*.ear=38;5;9:*.sar=38;5;9:*.rar=38;5;9:*.alz=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.cab=38;5;9:*.wim=38;5;9:*.swm=38;5;9:*.dwm=38;5;9:*.esd=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.mjpg=38;5;13:*.mjpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.webm=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.m4a=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.oga=38;5;45:*.opus=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:", "SSH_CONNECTION": "192.168.1.17 37588 192.168.1.41 22", "_": "/usr/libexec/platform-python", "LANG": "en_US.UTF-8", "which_declare": "declare -f", "XDG_SESSION_ID": "34", "USER": "iva", "SELINUX_ROLE_REQUESTED": "", "PWD": "/home/iva", "HOME": "/home/iva", "SSH_CLIENT": "192.168.1.17 37588 22", "SELINUX_LEVEL_REQUESTED": "", "SSH_TTY": "/dev/pts/0", "SHELL": "/bin/bash", "TERM": "xterm-256color", "SELINUX_USE_CURRENT_RANGE": "", "SHLVL": "2", "LOGNAME": "iva", "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus", "XDG_RUNTIME_DIR": "/run/user/1000", "PATH": "/home/iva/.local/bin:/home/iva/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin", "LESSOPEN": "||/usr/bin/lesspipe.sh %s", "BASH_FUNC_which%%": "() {  ( alias;\\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@\\n}"}, "ansible_interfaces": ["lo", "ens192"], "ansible_lo": {"device": "lo", "mtu": 65536, "active": true, "type": "loopback", "promisc": false, "ipv4": {"address": "127.0.0.1", "broadcast": "", "netmask": "255.0.0.0", "network": "127.0.0.0"}, "ipv6": [{"address": "::1", "prefix": "128", "scope": "host"}], "features": {"rx_checksumming": "on [fixed]", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on [fixed]", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "on [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on [fixed]", "tx_scatter_gather_fraglist": "on [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "on", "tx_tcp_mangleid_segmentation": "on", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "off [fixed]", "rx_vlan_offload": "off [fixed]", "tx_vlan_offload": "off [fixed]", "ntuple_filters": "off [fixed]", "receive_hashing": "off [fixed]", "highdma": "on [fixed]", "rx_vlan_filter": "off [fixed]", "vlan_challenged": "on [fixed]", "tx_lockless": "on [fixed]", "netns_local": "on [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off [fixed]", "tx_udp_tnl_csum_segmentation": "off [fixed]", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "on", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "on", "tx_gso_list": "on", "rx_udp_gro_forwarding": "off", "rx_gro_list": "off", "tls_hw_rx_offload": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off [fixed]", "loopback": "on [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_ens192": {"device": "ens192", "macaddress": "00:0c:29:f4:ba:5c", "mtu": 1500, "active": true, "module": "vmxnet3", "type": "ether", "pciid": "0000:0b:00.0", "speed": 10000, "promisc": false, "ipv4": {"address": "192.168.1.41", "broadcast": "192.168.1.255", "netmask": "255.255.255.0", "network": "192.168.1.0"}, "ipv6": [{"address": "fe80::fd2a:a3e5:6ed4:a8ef", "prefix": "64", "scope": "link"}], "features": {"rx_checksumming": "on", "tx_checksumming": "on", "tx_checksum_ipv4": "off [fixed]", "tx_checksum_ip_generic": "on", "tx_checksum_ipv6": "off [fixed]", "tx_checksum_fcoe_crc": "off [fixed]", "tx_checksum_sctp": "off [fixed]", "scatter_gather": "on", "tx_scatter_gather": "on", "tx_scatter_gather_fraglist": "off [fixed]", "tcp_segmentation_offload": "on", "tx_tcp_segmentation": "on", "tx_tcp_ecn_segmentation": "off [fixed]", "tx_tcp_mangleid_segmentation": "off", "tx_tcp6_segmentation": "on", "generic_segmentation_offload": "on", "generic_receive_offload": "on", "large_receive_offload": "on", "rx_vlan_offload": "on", "tx_vlan_offload": "on", "ntuple_filters": "off [fixed]", "receive_hashing": "on", "highdma": "on", "rx_vlan_filter": "on [fixed]", "vlan_challenged": "off [fixed]", "tx_lockless": "off [fixed]", "netns_local": "off [fixed]", "tx_gso_robust": "off [fixed]", "tx_fcoe_segmentation": "off [fixed]", "tx_gre_segmentation": "off [fixed]", "tx_gre_csum_segmentation": "off [fixed]", "tx_ipxip4_segmentation": "off [fixed]", "tx_ipxip6_segmentation": "off [fixed]", "tx_udp_tnl_segmentation": "off", "tx_udp_tnl_csum_segmentation": "off", "tx_gso_partial": "off [fixed]", "tx_tunnel_remcsum_segmentation": "off [fixed]", "tx_sctp_segmentation": "off [fixed]", "tx_esp_segmentation": "off [fixed]", "tx_udp_segmentation": "off [fixed]", "tx_gso_list": "off [fixed]", "rx_udp_gro_forwarding": "off", "rx_gro_list": "off", "tls_hw_rx_offload": "off [fixed]", "fcoe_mtu": "off [fixed]", "tx_nocache_copy": "off", "loopback": "off [fixed]", "rx_fcs": "off [fixed]", "rx_all": "off [fixed]", "tx_vlan_stag_hw_insert": "off [fixed]", "rx_vlan_stag_hw_parse": "off [fixed]", "rx_vlan_stag_filter": "off [fixed]", "l2_fwd_offload": "off [fixed]", "hw_tc_offload": "off [fixed]", "esp_hw_offload": "off [fixed]", "esp_tx_csum_hw_offload": "off [fixed]", "rx_udp_tunnel_port_offload": "off [fixed]", "tls_hw_tx_offload": "off [fixed]", "rx_gro_hw": "off [fixed]", "tls_hw_record": "off [fixed]"}, "timestamping": [], "hw_timestamp_filters": []}, "ansible_default_ipv4": {"gateway": "192.168.1.1", "interface": "ens192", "address": "192.168.1.41", "broadcast": "192.168.1.255", "netmask": "255.255.255.0", "network": "192.168.1.0", "macaddress": "00:0c:29:f4:ba:5c", "mtu": 1500, "type": "ether", "alias": "ens192"}, "ansible_default_ipv6": {}, "ansible_all_ipv4_addresses": ["192.168.1.41"], "ansible_all_ipv6_addresses": ["fe80::fd2a:a3e5:6ed4:a8ef"], "ansible_processor": ["0", "GenuineIntel", "Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz", "1", "GenuineIntel", "Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz", "2", "GenuineIntel", "Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz", "3", "GenuineIntel", "Intel(R) Xeon(R) CPU E3-1270 V2 @ 3.50GHz"], "ansible_processor_count": 4, "ansible_processor_cores": 1, "ansible_processor_threads_per_core": 1, "ansible_processor_vcpus": 4, "ansible_processor_nproc": 4, "ansible_memtotal_mb": 3922, "ansible_memfree_mb": 1563, "ansible_swaptotal_mb": 3279, "ansible_swapfree_mb": 3279, "ansible_memory_mb": {"real": {"total": 3922, "used": 2359, "free": 1563}, "nocache": {"free": 2799, "used": 1123}, "swap": {"total": 3279, "free": 3279, "used": 0, "cached": 0}}, "ansible_bios_date": "01/02/2020", "ansible_bios_vendor": "VMware, Inc.", "ansible_bios_version": "VMW71.00V.15401161.B64.2001021853", "ansible_board_asset_tag": "NA", "ansible_board_name": "440BX Desktop Reference Platform", "ansible_board_serial": "NA", "ansible_board_vendor": "Intel Corporation", "ansible_board_version": "None", "ansible_chassis_asset_tag": "No Asset Tag", "ansible_chassis_serial": "NA", "ansible_chassis_vendor": "No Enclosure", "ansible_chassis_version": "N/A", "ansible_form_factor": "Other", "ansible_product_name": "VMware7,1", "ansible_product_serial": "NA", "ansible_product_uuid": "NA", "ansible_product_version": "None", "ansible_system_vendor": "VMware, Inc.", "ansible_devices": {"dm-1": {"virtual": 1, "links": {"ids": ["dm-name-cs-swap", "dm-uuid-LVM-3ZZaONP23LQR7cS2DCXwnCGmjmC6JoF7Tg5yQbI0PU9V88nrRxbSgBlS0QMXosvF"], "uuids": ["336bc18c-b2a8-439f-93d2-8f1c1b85e118"], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "", "sectors": "6717440", "sectorsize": "512", "size": "3.20 GB", "host": "", "holders": []}, "sr0": {"virtual": 1, "links": {"ids": ["ata-VMware_Virtual_SATA_CDRW_Drive_00000000000000000001"], "uuids": ["2021-03-02-22-31-23-00"], "labels": ["CentOS-Stream-8-x86_64-dvd"], "masters": []}, "vendor": "NECVMWar", "model": "VMware SATA CD00", "sas_address": null, "sas_device_handle": null, "removable": "1", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "mq-deadline", "sectors": "19097600", "sectorsize": "2048", "size": "9.11 GB", "host": "SATA controller: VMware SATA AHCI controller", "holders": []}, "dm-0": {"virtual": 1, "links": {"ids": ["dm-name-cs-root", "dm-uuid-LVM-3ZZaONP23LQR7cS2DCXwnCGmjmC6JoF7DNIBmigJg0ZWc0VMbYoYXryk4qYy5RWg"], "uuids": ["d3d00e65-2c38-48e5-b065-70a73bdff1f7"], "labels": [], "masters": []}, "vendor": null, "model": null, "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {}, "rotational": "1", "scheduler_mode": "", "sectors": "57057280", "sectorsize": "512", "size": "27.21 GB", "host": "", "holders": []}, "sda": {"virtual": 1, "links": {"ids": [], "uuids": [], "labels": [], "masters": []}, "vendor": "VMware", "model": "Virtual disk", "sas_address": null, "sas_device_handle": null, "removable": "0", "support_discard": "0", "partitions": {"sda2": {"links": {"ids": [], "uuids": ["e0b7fb3a-232f-4a85-b6c3-b68b90b30be6"], "labels": [], "masters": []}, "start": "1230848", "sectors": "2097152", "sectorsize": 512, "size": "1.00 GB", "uuid": "e0b7fb3a-232f-4a85-b6c3-b68b90b30be6", "holders": []}, "sda3": {"links": {"ids": ["lvm-pv-uuid-vjgeZJ-gIXe-UE6r-q3oq-QVAV-ivRx-1j9vH1"], "uuids": [], "labels": [], "masters": ["dm-0", "dm-1"]}, "start": "3328000", "sectors": "63778816", "sectorsize": 512, "size": "30.41 GB", "uuid": null, "holders": ["cs-swap", "cs-root"]}, "sda1": {"links": {"ids": [], "uuids": ["0517-DF29"], "labels": [], "masters": []}, "start": "2048", "sectors": "1228800", "sectorsize": 512, "size": "600.00 MB", "uuid": "0517-DF29", "holders": []}}, "rotational": "1", "scheduler_mode": "mq-deadline", "sectors": "67108864", "sectorsize": "512", "size": "32.00 GB", "host": "Serial Attached SCSI controller: VMware PVSCSI SCSI Controller (rev 02)", "holders": []}}, "ansible_device_links": {"ids": {"dm-1": ["dm-name-cs-swap", "dm-uuid-LVM-3ZZaONP23LQR7cS2DCXwnCGmjmC6JoF7Tg5yQbI0PU9V88nrRxbSgBlS0QMXosvF"], "dm-0": ["dm-name-cs-root", "dm-uuid-LVM-3ZZaONP23LQR7cS2DCXwnCGmjmC6JoF7DNIBmigJg0ZWc0VMbYoYXryk4qYy5RWg"], "sda3": ["lvm-pv-uuid-vjgeZJ-gIXe-UE6r-q3oq-QVAV-ivRx-1j9vH1"], "sr0": ["ata-VMware_Virtual_SATA_CDRW_Drive_00000000000000000001"]}, "uuids": {"sr0": ["2021-03-02-22-31-23-00"], "dm-1": ["336bc18c-b2a8-439f-93d2-8f1c1b85e118"], "dm-0": ["d3d00e65-2c38-48e5-b065-70a73bdff1f7"], "sda2": ["e0b7fb3a-232f-4a85-b6c3-b68b90b30be6"], "sda1": ["0517-DF29"]}, "labels": {"sr0": ["CentOS-Stream-8-x86_64-dvd"]}, "masters": {"sda3": ["dm-0", "dm-1"]}}, "ansible_uptime_seconds": 5811, "ansible_mounts": [{"mount": "/", "device": "/dev/mapper/cs-root", "fstype": "xfs", "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota", "size_total": 29199065088, "size_available": 26052669440, "block_size": 4096, "block_total": 7128678, "block_available": 6360515, "block_used": 768163, "inode_total": 14264320, "inode_available": 14213235, "inode_used": 51085, "uuid": "d3d00e65-2c38-48e5-b065-70a73bdff1f7"}, {"mount": "/boot", "device": "/dev/sda2", "fstype": "xfs", "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota", "size_total": 1063256064, "size_available": 840597504, "block_size": 4096, "block_total": 259584, "block_available": 205224, "block_used": 54360, "inode_total": 524288, "inode_available": 524264, "inode_used": 24, "uuid": "e0b7fb3a-232f-4a85-b6c3-b68b90b30be6"}, {"mount": "/boot/efi", "device": "/dev/sda1", "fstype": "vfat", "options": "rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=winnt,errors=remount-ro", "size_total": 627900416, "size_available": 620306432, "block_size": 4096, "block_total": 153296, "block_available": 151442, "block_used": 1854, "inode_total": 0, "inode_available": 0, "inode_used": 0, "uuid": "0517-DF29"}], "ansible_service_mgr": "systemd", "ansible_pkg_mgr": "dnf", "gather_subset": ["all"], "module_setup": true}, "invocation": {"module_args": {"gather_subset": ["all"], "gather_timeout": 10, "filter": [], "fact_path": "/etc/ansible/facts.d"}}}\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047583.7425342-83204-213502609867221/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+ok: [clickhouse-01]
+META: ran handlers
+
+TASK [Get clickhouse distrib] **************************************************
+task path: /home/iva/Documents/08-ansible/08-2/site.yml:12
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807 `" && echo ansible-tmp-1652047585.0344043-83228-251501154595807="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047585.0344043-83228-251501154595807=/home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/get_url.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpk7tg5_b9 TO /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/AnsiballZ_get_url.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpk7tg5_b9 /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/AnsiballZ_get_url.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/ /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'\r\n{"msg": "OK (38543 bytes)", "changed": true, "checksum_dest": null, "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709", "dest": "./clickhouse-client-22.4.4.7.rpm", "elapsed": 0, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-client-22.4.4.7.noarch.rpm", "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/tmpktgtqp6f", "invocation": {"module_args": {"url": "https://packages.clickhouse.com/rpm/stable/clickhouse-client-22.4.4.7.noarch.rpm", "dest": "./clickhouse-client-22.4.4.7.rpm", "mode": 493, "force": false, "http_agent": "ansible-httpget", "use_proxy": true, "validate_certs": true, "force_basic_auth": false, "use_gssapi": false, "backup": false, "sha256sum": "", "checksum": "", "timeout": 10, "unredirected_headers": [], "unsafe_writes": false, "url_username": null, "url_password": null, "client_cert": null, "client_key": null, "headers": null, "tmp_dest": null, "owner": null, "group": null, "seuser": null, "serole": null, "selevel": null, "setype": null, "attributes": null}}}\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+changed: [clickhouse-01] => (item=clickhouse-client) => {
+    "ansible_loop_var": "item",
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "./clickhouse-client-22.4.4.7.rpm",
+    "elapsed": 0,
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": false,
+            "checksum": "",
+            "client_cert": null,
+            "client_key": null,
+            "dest": "./clickhouse-client-22.4.4.7.rpm",
+            "force": false,
+            "force_basic_auth": false,
+            "group": null,
+            "headers": null,
+            "http_agent": "ansible-httpget",
+            "mode": 493,
+            "owner": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "sha256sum": "",
+            "timeout": 10,
+            "tmp_dest": null,
+            "unredirected_headers": [],
+            "unsafe_writes": false,
+            "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-client-22.4.4.7.noarch.rpm",
+            "url_password": null,
+            "url_username": null,
+            "use_gssapi": false,
+            "use_proxy": true,
+            "validate_certs": true
+        }
+    },
+    "item": "clickhouse-client",
+    "msg": "OK (38543 bytes)",
+    "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047585.0344043-83228-251501154595807/tmpktgtqp6f",
+    "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-client-22.4.4.7.noarch.rpm"
+}
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456 `" && echo ansible-tmp-1652047585.83283-83228-14929379670456="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047585.83283-83228-14929379670456=/home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/get_url.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmp97rdb7z6 TO /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/AnsiballZ_get_url.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmp97rdb7z6 /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/AnsiballZ_get_url.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/ /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'\r\n{"msg": "OK (61643 bytes)", "changed": true, "checksum_dest": null, "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709", "dest": "./clickhouse-server-22.4.4.7.rpm", "elapsed": 0, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-server-22.4.4.7.noarch.rpm", "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/tmpwrxv9o17", "invocation": {"module_args": {"url": "https://packages.clickhouse.com/rpm/stable/clickhouse-server-22.4.4.7.noarch.rpm", "dest": "./clickhouse-server-22.4.4.7.rpm", "mode": 493, "force": false, "http_agent": "ansible-httpget", "use_proxy": true, "validate_certs": true, "force_basic_auth": false, "use_gssapi": false, "backup": false, "sha256sum": "", "checksum": "", "timeout": 10, "unredirected_headers": [], "unsafe_writes": false, "url_username": null, "url_password": null, "client_cert": null, "client_key": null, "headers": null, "tmp_dest": null, "owner": null, "group": null, "seuser": null, "serole": null, "selevel": null, "setype": null, "attributes": null}}}\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+changed: [clickhouse-01] => (item=clickhouse-server) => {
+    "ansible_loop_var": "item",
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "./clickhouse-server-22.4.4.7.rpm",
+    "elapsed": 0,
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": false,
+            "checksum": "",
+            "client_cert": null,
+            "client_key": null,
+            "dest": "./clickhouse-server-22.4.4.7.rpm",
+            "force": false,
+            "force_basic_auth": false,
+            "group": null,
+            "headers": null,
+            "http_agent": "ansible-httpget",
+            "mode": 493,
+            "owner": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "sha256sum": "",
+            "timeout": 10,
+            "tmp_dest": null,
+            "unredirected_headers": [],
+            "unsafe_writes": false,
+            "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-server-22.4.4.7.noarch.rpm",
+            "url_password": null,
+            "url_username": null,
+            "use_gssapi": false,
+            "use_proxy": true,
+            "validate_certs": true
+        }
+    },
+    "item": "clickhouse-server",
+    "msg": "OK (61643 bytes)",
+    "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047585.83283-83228-14929379670456/tmpwrxv9o17",
+    "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-server-22.4.4.7.noarch.rpm"
+}
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175 `" && echo ansible-tmp-1652047586.3974504-83228-45383641716175="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047586.3974504-83228-45383641716175=/home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/get_url.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpa4hy72wb TO /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/AnsiballZ_get_url.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpa4hy72wb /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/AnsiballZ_get_url.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/ /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (1, b'\r\n{"status_code": 404, "response": "HTTP Error 404: Not Found", "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.noarch.rpm", "dest": "./clickhouse-common-static-22.4.4.7.rpm", "elapsed": 0, "failed": true, "msg": "Request failed", "invocation": {"module_args": {"url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.noarch.rpm", "dest": "./clickhouse-common-static-22.4.4.7.rpm", "mode": 493, "force": false, "http_agent": "ansible-httpget", "use_proxy": true, "validate_certs": true, "force_basic_auth": false, "use_gssapi": false, "backup": false, "sha256sum": "", "checksum": "", "timeout": 10, "unredirected_headers": [], "unsafe_writes": false, "url_username": null, "url_password": null, "client_cert": null, "client_key": null, "headers": null, "tmp_dest": null, "owner": null, "group": null, "seuser": null, "serole": null, "selevel": null, "setype": null, "attributes": null}}}\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> Failed to connect to the host via ssh: Shared connection to 192.168.1.41 closed.
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047586.3974504-83228-45383641716175/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+failed: [clickhouse-01] (item=clickhouse-common-static) => {
+    "ansible_loop_var": "item",
+    "changed": false,
+    "dest": "./clickhouse-common-static-22.4.4.7.rpm",
+    "elapsed": 0,
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": false,
+            "checksum": "",
+            "client_cert": null,
+            "client_key": null,
+            "dest": "./clickhouse-common-static-22.4.4.7.rpm",
+            "force": false,
+            "force_basic_auth": false,
+            "group": null,
+            "headers": null,
+            "http_agent": "ansible-httpget",
+            "mode": 493,
+            "owner": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "sha256sum": "",
+            "timeout": 10,
+            "tmp_dest": null,
+            "unredirected_headers": [],
+            "unsafe_writes": false,
+            "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.noarch.rpm",
+            "url_password": null,
+            "url_username": null,
+            "use_gssapi": false,
+            "use_proxy": true,
+            "validate_certs": true
+        }
+    },
+    "item": "clickhouse-common-static",
+    "msg": "Request failed",
+    "response": "HTTP Error 404: Not Found",
+    "status_code": 404,
+    "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.noarch.rpm"
+}
+
+TASK [Get clickhouse distrib] **************************************************
+task path: /home/iva/Documents/08-ansible/08-2/site.yml:19
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258 `" && echo ansible-tmp-1652047587.0936117-83258-51132222040258="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047587.0936117-83258-51132222040258=/home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/get_url.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmp_xh8imy8 TO /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/AnsiballZ_get_url.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmp_xh8imy8 /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/AnsiballZ_get_url.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/ /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'/usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/AnsiballZ_get_url.py && sleep 0'"'"''
+<192.168.1.41> (0, b'\r\n{"msg": "OK (251606890 bytes)", "changed": true, "checksum_dest": null, "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709", "dest": "./clickhouse-common-static-22.4.4.7.rpm", "elapsed": 0, "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.x86_64.rpm", "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/tmplvxqffrr", "invocation": {"module_args": {"url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.x86_64.rpm", "dest": "./clickhouse-common-static-22.4.4.7.rpm", "mode": 493, "force": false, "http_agent": "ansible-httpget", "use_proxy": true, "validate_certs": true, "force_basic_auth": false, "use_gssapi": false, "backup": false, "sha256sum": "", "checksum": "", "timeout": 10, "unredirected_headers": [], "unsafe_writes": false, "url_username": null, "url_password": null, "client_cert": null, "client_key": null, "headers": null, "tmp_dest": null, "owner": null, "group": null, "seuser": null, "serole": null, "selevel": null, "setype": null, "attributes": null}}}\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+changed: [clickhouse-01] => {
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "dest": "./clickhouse-common-static-22.4.4.7.rpm",
+    "elapsed": 0,
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": false,
+            "checksum": "",
+            "client_cert": null,
+            "client_key": null,
+            "dest": "./clickhouse-common-static-22.4.4.7.rpm",
+            "force": false,
+            "force_basic_auth": false,
+            "group": null,
+            "headers": null,
+            "http_agent": "ansible-httpget",
+            "mode": 493,
+            "owner": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "sha256sum": "",
+            "timeout": 10,
+            "tmp_dest": null,
+            "unredirected_headers": [],
+            "unsafe_writes": false,
+            "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.x86_64.rpm",
+            "url_password": null,
+            "url_username": null,
+            "use_gssapi": false,
+            "use_proxy": true,
+            "validate_certs": true
+        }
+    },
+    "msg": "OK (251606890 bytes)",
+    "src": "/home/iva/.ansible/tmp/ansible-tmp-1652047587.0936117-83258-51132222040258/tmplvxqffrr",
+    "url": "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-22.4.4.7.x86_64.rpm"
+}
+
+TASK [Install clickhouse packages] *********************************************
+task path: /home/iva/Documents/08-ansible/08-2/site.yml:24
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<192.168.1.41> (0, b'/home/iva\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/iva/.ansible/tmp `"&& mkdir "` echo /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127 `" && echo ansible-tmp-1652047587.644661-83268-60172319615127="` echo /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127 `" ) && sleep 0'"'"''
+<192.168.1.41> (0, b'ansible-tmp-1652047587.644661-83268-60172319615127=/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127\n', b'')
+Using module file /home/iva/.local/lib/python3.9/site-packages/ansible/modules/dnf.py
+<192.168.1.41> PUT /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpggrc01sa TO /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py
+<192.168.1.41> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' '[192.168.1.41]'
+<192.168.1.41> (0, b'sftp> put /home/iva/.ansible/tmp/ansible-local-83200mn_gk43y/tmpggrc01sa /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py\n', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'chmod u+x /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/ /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' -tt 192.168.1.41 '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-rdlzxcywtybxuaramzlhsvypbxxbdxzu ; /usr/libexec/platform-python /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py'"'"'"'"'"'"'"'"' && sleep 0'"'"''
+Escalation succeeded
+<192.168.1.41> (1, b'Traceback (most recent call last):\r\n  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 107, in <module>\r\n    _ansiballz_main()\r\n  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 99, in _ansiballz_main\r\n    invoke_module(zipped_mod, temp_path, ANSIBALLZ_PARAMS)\r\n  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 48, in invoke_module\r\n    run_name=\'__main__\', alter_sys=True)\r\n  File "/usr/lib64/python3.6/runpy.py", line 205, in run_module\r\n    return _run_module_code(code, init_globals, run_name, mod_spec)\r\n  File "/usr/lib64/python3.6/runpy.py", line 96, in _run_module_code\r\n    mod_name, mod_spec, pkg_name, script_name)\r\n  File "/usr/lib64/python3.6/runpy.py", line 85, in _run_code\r\n    exec(code, run_globals)\r\n  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1427, in <module>\r\n  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1416, in main\r\n  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1390, in run\r\n  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1048, in ensure\r\n  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 948, in _install_remote_rpms\r\n  File "/usr/lib/python3.6/site-packages/dnf/base.py", line 1271, in add_remote_rpms\r\n    raise IOError(_("Could not open: {}").format(\' \'.join(pkgs_error)))\r\nOSError: Could not open: clickhouse-common-static-22.4.4.7.rpm clickhouse-client-22.4.4.7.rpm clickhouse-server-22.4.4.7.rpm\r\n', b'Shared connection to 192.168.1.41 closed.\r\n')
+<192.168.1.41> Failed to connect to the host via ssh: Shared connection to 192.168.1.41 closed.
+<192.168.1.41> ESTABLISH SSH CONNECTION FOR USER: None
+<192.168.1.41> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/iva/.ansible/cp/d78986157e"' 192.168.1.41 '/bin/sh -c '"'"'rm -f -r /home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/ > /dev/null 2>&1 && sleep 0'"'"''
+<192.168.1.41> (0, b'', b'')
+The full traceback is:
+Traceback (most recent call last):
+  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 107, in <module>
+    _ansiballz_main()
+  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 99, in _ansiballz_main
+    invoke_module(zipped_mod, temp_path, ANSIBALLZ_PARAMS)
+  File "/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py", line 48, in invoke_module
+    run_name='__main__', alter_sys=True)
+  File "/usr/lib64/python3.6/runpy.py", line 205, in run_module
+    return _run_module_code(code, init_globals, run_name, mod_spec)
+  File "/usr/lib64/python3.6/runpy.py", line 96, in _run_module_code
+    mod_name, mod_spec, pkg_name, script_name)
+  File "/usr/lib64/python3.6/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1427, in <module>
+  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1416, in main
+  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1390, in run
+  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 1048, in ensure
+  File "/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py", line 948, in _install_remote_rpms
+  File "/usr/lib/python3.6/site-packages/dnf/base.py", line 1271, in add_remote_rpms
+    raise IOError(_("Could not open: {}").format(' '.join(pkgs_error)))
+OSError: Could not open: clickhouse-common-static-22.4.4.7.rpm clickhouse-client-22.4.4.7.rpm clickhouse-server-22.4.4.7.rpm
+fatal: [clickhouse-01]: FAILED! => {
+    "changed": false,
+    "module_stderr": "Shared connection to 192.168.1.41 closed.\r\n",
+    "module_stdout": "Traceback (most recent call last):\r\n  File \"/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py\", line 107, in <module>\r\n    _ansiballz_main()\r\n  File \"/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py\", line 99, in _ansiballz_main\r\n    invoke_module(zipped_mod, temp_path, ANSIBALLZ_PARAMS)\r\n  File \"/home/iva/.ansible/tmp/ansible-tmp-1652047587.644661-83268-60172319615127/AnsiballZ_dnf.py\", line 48, in invoke_module\r\n    run_name='__main__', alter_sys=True)\r\n  File \"/usr/lib64/python3.6/runpy.py\", line 205, in run_module\r\n    return _run_module_code(code, init_globals, run_name, mod_spec)\r\n  File \"/usr/lib64/python3.6/runpy.py\", line 96, in _run_module_code\r\n    mod_name, mod_spec, pkg_name, script_name)\r\n  File \"/usr/lib64/python3.6/runpy.py\", line 85, in _run_code\r\n    exec(code, run_globals)\r\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1427, in <module>\r\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1416, in main\r\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1390, in run\r\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 1048, in ensure\r\n  File \"/tmp/ansible_ansible.legacy.dnf_payload_t_03fb_2/ansible_ansible.legacy.dnf_payload.zip/ansible/modules/dnf.py\", line 948, in _install_remote_rpms\r\n  File \"/usr/lib/python3.6/site-packages/dnf/base.py\", line 1271, in add_remote_rpms\r\n    raise IOError(_(\"Could not open: {}\").format(' '.join(pkgs_error)))\r\nOSError: Could not open: clickhouse-common-static-22.4.4.7.rpm clickhouse-client-22.4.4.7.rpm clickhouse-server-22.4.4.7.rpm\r\n",
+    "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error",
+    "rc": 1
+}
+
+PLAY RECAP *********************************************************************
+clickhouse-01              : ok=2    changed=1    unreachable=0    failed=1    skipped=0    rescued=1    ignored=0   
+
