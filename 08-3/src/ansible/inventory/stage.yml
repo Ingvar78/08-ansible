@@ -2,15 +2,15 @@
 clickhouse:
   hosts:
     c8-clickhouse:
-      ansible_host: 51.250.69.253
+      ansible_host: 192.168.1.41
       ansible_user: ansible
 vector:
   hosts:
     c8-vector:
-      ansible_host: 51.250.64.213
+      ansible_host: 192.168.1.42
       ansible_user: ansible
 lighthouse:
   hosts:
     c8-lighthouse:
-      andible_host: 51.250.88.183
+      andible_host: 192.168.1.43
       ansible_user: ansible

@@ -7,30 +7,54 @@
 Apply complete! Resources: 3 added, 0 changed, 1 destroyed.
 
 ```bash
+
+yandex_vpc_subnet.vpcsubnet: Creation complete after 1s [id=e9b3bsugu0e62p21a76o]
+yandex_compute_instance.vm["lighthouse"]: Creating...
+yandex_compute_instance.vm["clickhouse"]: Creating...
+yandex_compute_instance.vm["vector"]: Creating...
+yandex_compute_instance.vm["lighthouse"]: Still creating... [10s elapsed]
+yandex_compute_instance.vm["vector"]: Still creating... [10s elapsed]
+yandex_compute_instance.vm["clickhouse"]: Still creating... [10s elapsed]
+yandex_compute_instance.vm["clickhouse"]: Still creating... [20s elapsed]
+yandex_compute_instance.vm["lighthouse"]: Still creating... [20s elapsed]
+yandex_compute_instance.vm["vector"]: Still creating... [20s elapsed]
+yandex_compute_instance.vm["vector"]: Creation complete after 21s [id=fhma74id6hk63tlu3n9j]
+yandex_compute_instance.vm["clickhouse"]: Creation complete after 24s [id=fhm7ssj5svnbjadfmc9b]
+yandex_compute_instance.vm["lighthouse"]: Creation complete after 24s [id=fhmkcb53t5l7ethjqac3]
+
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+
 Outputs:
 
-external_name = toset([
-  "c8-clickhouse",
-  "c8-lighthouse",
-  "c8-vector",
-])
-internal_ip = toset([
-  "10.2.0.12",
-  "10.2.0.30",
-  "10.2.0.9",
-])
-nat_ip = toset([
-  "51.250.0.121",
-  "51.250.1.82",
-  "51.250.11.155",
-])
+internal_ip = {
+  "clickhouse" = tolist([
+    "10.2.0.22",
+  ])
+  "lighthouse" = tolist([
+    "10.2.0.21",
+  ])
+  "vector" = tolist([
+    "10.2.0.33",
+  ])
+}
+nat_ip = {
+  "clickhouse" = tolist([
+    "51.250.69.253",
+  ])
+  "lighthouse" = tolist([
+    "51.250.88.183",
+  ])
+  "vector" = tolist([
+    "51.250.64.213",
+  ])
+}
 iva@c9:~/Documents/Terraform $ yc compute instance list
 +----------------------+---------------+---------------+---------+---------------+-------------+
 |          ID          |     NAME      |    ZONE ID    | STATUS  |  EXTERNAL IP  | INTERNAL IP |
 +----------------------+---------------+---------------+---------+---------------+-------------+
-| fhm5el1taluirupcbt3d | c8-vector     | ru-central1-a | RUNNING | 51.250.1.82   | 10.2.0.12   |
-| fhmbg04l5mqlji7k54u4 | c8-clickhouse | ru-central1-a | RUNNING | 51.250.0.121  | 10.2.0.9    |
-| fhmcumq7a5349fslim1o | c8-lighthouse | ru-central1-a | RUNNING | 51.250.11.155 | 10.2.0.30   |
+| fhm7ssj5svnbjadfmc9b | c8-clickhouse | ru-central1-a | RUNNING | 51.250.69.253 | 10.2.0.22   |
+| fhma74id6hk63tlu3n9j | c8-vector     | ru-central1-a | RUNNING | 51.250.64.213 | 10.2.0.33   |
+| fhmkcb53t5l7ethjqac3 | c8-lighthouse | ru-central1-a | RUNNING | 51.250.88.183 | 10.2.0.21   |
 +----------------------+---------------+---------------+---------+---------------+-------------+
 ```
 
