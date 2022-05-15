@@ -1,7 +1,7 @@
 ---
 - name: Drop database Clickhouse
   hosts: clickhouse
-  tags: [drop_clickhouse_database_logs, debug]
+  tags: [drop_clickhouse_database_logs, never]
   tasks:
     - name: Drop clickhouse database logs
       ansible.builtin.command:
@@ -50,6 +50,9 @@
       notify: Start clickhouse service
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
+    - name: Delay befor create DB - Pause playbook
+      ansible.builtin.pause:
+        seconds: 10
     - name: Create database
       ansible.builtin.command:
         argv:
@@ -66,9 +69,8 @@
           - clickhouse-client
           - --database
           - "{{ clickhouse_database_name }}"
-          - -q 
-          - |
-            {{ clickhouse_create_table }}
+          - -q
+          - 'CREATE TABLE IF NOT EXISTS  logs.access_logs ( message String ) ENGINE = MergeTree() ORDER BY tuple()'
       register: create_table
       failed_when: create_table.rc != 0 and create_table.rc !=57 # table already exists
       changed_when: create_table.rc == 0
@@ -81,14 +83,23 @@
         name: vector
         state: restarted
   tasks:
-    - name: Get vectore distrib
+    - name: Get vector distrib
       ansible.builtin.get_url:
         url: https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm
         dest: ./vector-{{ vector_version }}-1.x86_64.rpm
         mode: 0755
-    - name: Install vectore rpm
+    - name: Install vector rpm
       become: true
       ansible.builtin.yum:
         name: vector-{{ vector_version }}-1.x86_64.rpm
         disable_gpg_check: true
       notify: Start vector service
+- name: Install Nginx
+  hosts: vector
+  handlers:
+    - name: Start nginx
+      become: true
+      ansible.builtin.command: nginx
+    - name: Reload nginx
+      become: true
+      ansible.builtin.command: nginx -s reload
