@@ -12,7 +12,8 @@
       register: drop_table
       failed_when: drop_table.rc != 0 and drop_table.rc !=81 # db doesn't exist
       changed_when: drop_table.rc == 0
-- name: Install Clickhouse
+
+- name: Clickhouse | Install Clickhouse
   hosts: clickhouse
   handlers:
     - name: Start clickhouse service
@@ -20,26 +21,38 @@
       ansible.builtin.service:
         name: clickhouse-server
         state: restarted
+  pre_tasks:
+    - name: FireWall Clickhouse | Разрешим 8123 порт
+      become: true
+      ansible.posix.firewalld:
+        port: 8123/tcp
+        permanent: true
+        state: enabled
+    - name: FireWall Clickhouse | Перезапустим service firewalld
+      become: true
+      ansible.builtin.service:
+        name: firewalld
+        state: restarted
   tasks:
     - block:
-        - name: Get clickhouse distrib
+        - name: Clickhouse | Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
             dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
             mode: 0755
           with_items: "{{ clickhouse_packages }}"
-        - name: Get clickhouse distrib static
+        - name: Clickhouse | Get clickhouse distrib static
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
             mode: 0755
       rescue:
-        - name: Get clickhouse distrib
+        - name: Clickhouse | Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
             dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
             mode: 0755
-    - name: Install clickhouse packages
+    - name: Clickhouse | Install clickhouse packages
       become: true
       ansible.builtin.yum:
         name:
@@ -53,16 +66,16 @@
     - name: Delay befor create DB - Pause playbook
       ansible.builtin.pause:
         seconds: 10
-    - name: Create database
+    - name: Clickhouse | Create database
       ansible.builtin.command:
         argv:
           - clickhouse-client
           - -q
           - create database {{ clickhouse_database_name }};
       register: create_db
-      failed_when: create_db.rc != 0 and create_db.rc !=82
+      failed_when: create_db.rc != 0 and create_db.rc !=82 # db already exists
       changed_when: create_db.rc == 0
-    - name: Create log table
+    - name: Clickhouse | Create log table
       tags: clickhouse_db
       ansible.builtin.command:
         argv:
@@ -70,10 +83,18 @@
           - --database
           - "{{ clickhouse_database_name }}"
           - -q
-          - 'CREATE TABLE IF NOT EXISTS  logs.access_logs ( message String ) ENGINE = MergeTree() ORDER BY tuple()'
+          - "{{ clickhouse_create_table }}" # - 'CREATE TABLE IF NOT EXISTS  logs.access_logs ( message String ) ENGINE = MergeTree() ORDER BY tuple()'
       register: create_table
       failed_when: create_table.rc != 0 and create_table.rc !=57 # table already exists
       changed_when: create_table.rc == 0
+    - name: Clickhouse | General config
+      become: true
+      ansible.builtin.template:
+        src: templates/clickhouse.xml.j2
+        dest: /etc/clickhouse-server/config.xml
+        mode: 0644
+      notify: Start clickhouse service
+
 - name: Install Vector
   hosts: vector
   handlers:
@@ -82,18 +103,51 @@
       ansible.builtin.service:
         name: vector
         state: restarted
+  pre_tasks:
+    - name: Vector | Add clickhouse addresses to /etc/hosts
+      become: true
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        line: "{{ hostvars[item].ansible_host }} {{item}}"
+        state: present
+      when: hostvars[item].ansible_host is defined
+      with_items: "{{ groups.clickhouse }}"
   tasks:
-    - name: Get vector distrib
+    - name: Vector | Get vector distrib
       ansible.builtin.get_url:
         url: https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm
         dest: ./vector-{{ vector_version }}-1.x86_64.rpm
         mode: 0755
-    - name: Install vector rpm
+    - name: Vector | Install vector rpm
       become: true
       ansible.builtin.yum:
         name: vector-{{ vector_version }}-1.x86_64.rpm
         disable_gpg_check: true
+    - name: Vector | Update vector config
+      become: true
+      ansible.builtin.lineinfile:
+        path: /etc/default/vector
+        regexp: 'VECTOR_CONFIG='
+        line: VECTOR_CONFIG=/etc/vector/config.yaml
+    - name: Vector | Create vector config
+      become: true
+      ansible.builtin.copy: 
+        dest: /etc/vector/config.yaml
+        content: |
+          {{ vector_config | to_nice_yaml(indent=2) }}
+#          endpoint: http://c8-lighthouse:8123
+    - name: Replace host ip
+      become: true
+      ansible.builtin.replace:
+        path: /etc/vector/config.yaml
+        regexp: 'endpoint: http://c8-clickhouse:8123'
+        replace: "endpoint: http://{{ hostvars[item].ansible_host }}:8123"
+        backup: true
+      when: hostvars[item].ansible_host is defined
+      with_items: "{{ groups.clickhouse }}"
       notify: Start vector service
+
 - name: Install Nginx
   hosts: lighthouse
   become: true
@@ -121,10 +175,43 @@
     - name: Nginx | Разрешим 80 порт
       ansible.posix.firewalld:
         service: http
-        permanent: yes
+        permanent: true
         state: enabled
     - name: NGINX | Перезапустим service firewalld на всех узлах
       ansible.builtin.service:
         name: firewalld
         state: restarted
-      
+- name: Install LightHouse
+  hosts: lighthouse
+  become: true
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.command: nginx -s reload
+  pre_tasks:
+    - name: LightHouse | Install git
+      ansible.builtin.yum:
+        name: git
+        state: present
+    - name: Add clickhouse addresses to /etc/hosts
+      become: true
+      lineinfile:
+        dest: /etc/hosts
+        regexp: '.*{{ item }}$'
+        line: "{{ hostvars[item].ansible_host }} {{item}}"
+        state: present
+      when: hostvars[item].ansible_host is defined
+      with_items: "{{ groups.clickhouse }}"
+  tasks:
+    - name: LightHouse | Get from git repo
+      become: true
+      ansible.builtin.git:
+        repo: "{{ lighthouse_git }}"
+        version: master
+        dest: "{{ lighthouse_home_dir }}"
+    - name: LightHouse | LightHouse nginx config
+      become: true
+      ansible.builtin.template:
+        src: lighthouse.conf.j2
+        dest: /etc/nginx/conf.d/default.conf
+        mode: 0644
+      notify: Reload Nginx

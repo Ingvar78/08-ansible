@@ -3,3 +3,25 @@ vector_version: "0.21.1"
 vector_packages:
   - vector-server
 nginx_user: nginx
+vector_config:
+  sources:
+    our_log:
+      type: file
+      read_from: beginning
+      ignore_older_secs: 600
+      include:
+      - /var/log/*.log
+  sinks:
+    to_clickhouse:
+      type: clickhouse
+      inputs:
+        - our_log
+      database: logs
+      endpoint: http://c8-clickhouse:8123
+      table: access_logs
+      compression: gzip
+      healthcheck: false
+      skip_unknown_fields: true
+  api:
+    enabled: true
+    address: '0.0.0.0:8686'
