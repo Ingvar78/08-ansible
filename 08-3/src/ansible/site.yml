@@ -96,10 +96,35 @@
       notify: Start vector service
 - name: Install Nginx
   hosts: vector
+  become: true
   handlers:
     - name: Start nginx
-      become: true
       ansible.builtin.command: nginx
     - name: Reload nginx
-      become: true
       ansible.builtin.command: nginx -s reload
+  tasks:
+    - name: NGINX | Install eper-release
+      ansible.builtin.yum:
+        name: epel-release
+        state: present
+    - name: NGINX | Install Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
+      notify: Start nginx
+    - name: NGINX | Create general config
+      ansible.builtin.template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        mode: 0644
+      notify: Reload nginx
+    - name: NGINX | OpenPort http Разрешим 80 порт
+      ansible.posix.firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+    - name: NGINX | OpenPort http Перезапустим service firewalld на всех узлах
+      ansible.builtin.service:
+        name: firewalld
+        state: restarted
+      
