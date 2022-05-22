@@ -124,6 +124,12 @@
       ansible.builtin.yum:
         name: vector-{{ vector_version }}-1.x86_64.rpm
         disable_gpg_check: true
+    - name: Add vector user to systemd-journal group
+      become: true
+      user:
+        name: vector
+        groups: systemd-journal
+        append: true       
     - name: Vector | Update vector config
       become: true
       ansible.builtin.lineinfile:
@@ -132,11 +138,10 @@
         line: VECTOR_CONFIG=/etc/vector/config.yaml
     - name: Vector | Create vector config
       become: true
-      ansible.builtin.copy: 
+      ansible.builtin.copy:
         dest: /etc/vector/config.yaml
         content: |
           {{ vector_config | to_nice_yaml(indent=2) }}
-#          endpoint: http://c8-lighthouse:8123
     - name: Replace host ip
       become: true
       ansible.builtin.replace:
@@ -149,7 +154,7 @@
       notify: Start vector service
 
 - name: Install Nginx
-  hosts: lighthouse
+  hosts: lighthouse:vector
   become: true
   handlers:
     - name: Start nginx
@@ -166,6 +171,7 @@
         name: nginx
         state: present
       notify: Start nginx
+    - name: 
     - name: Nginx | Create general config
       ansible.builtin.template:
         src: templates/nginx.conf.j2
@@ -177,10 +183,11 @@
         service: http
         permanent: true
         state: enabled
-    - name: NGINX | Перезапустим service firewalld на всех узлах
+    - name: Nginx | Перезапустим service firewalld на всех узлах
       ansible.builtin.service:
         name: firewalld
         state: restarted
+
 - name: Install LightHouse
   hosts: lighthouse
   become: true

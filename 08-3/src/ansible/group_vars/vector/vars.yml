@@ -5,17 +5,16 @@ vector_packages:
 nginx_user: nginx
 vector_config:
   sources:
-    our_log:
+    any_logs:
       type: file
-      read_from: beginning
-      ignore_older_secs: 600
       include:
-      - /var/log/*.log
+      - /var/log/nginx/*.log
+      read_from: end
   sinks:
     to_clickhouse:
       type: clickhouse
       inputs:
-        - our_log
+        - any_logs
       database: logs
       endpoint: http://c8-clickhouse:8123
       table: access_logs
