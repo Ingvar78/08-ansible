@@ -95,7 +95,7 @@
         disable_gpg_check: true
       notify: Start vector service
 - name: Install Nginx
-  hosts: vector
+  hosts: lighthouse
   become: true
   handlers:
     - name: Start nginx
@@ -103,27 +103,27 @@
     - name: Reload nginx
       ansible.builtin.command: nginx -s reload
   tasks:
-    - name: NGINX | Install eper-release
+    - name: Nginx | Install eper-release
       ansible.builtin.yum:
         name: epel-release
         state: present
-    - name: NGINX | Install Nginx
+    - name: Nginx | Install Nginx
       ansible.builtin.yum:
         name: nginx
         state: present
       notify: Start nginx
-    - name: NGINX | Create general config
+    - name: Nginx | Create general config
       ansible.builtin.template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
         mode: 0644
       notify: Reload nginx
-    - name: NGINX | OpenPort http Разрешим 80 порт
+    - name: Nginx | Разрешим 80 порт
       ansible.posix.firewalld:
         service: http
         permanent: yes
         state: enabled
-    - name: NGINX | OpenPort http Перезапустим service firewalld на всех узлах
+    - name: NGINX | Перезапустим service firewalld на всех узлах
       ansible.builtin.service:
         name: firewalld
         state: restarted
