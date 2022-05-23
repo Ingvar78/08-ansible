@@ -8,7 +8,7 @@ vector_config:
     any_logs:
       type: file
       include:
-        - /var/log/nginx/*.log
+        - /var/log/**/*.log
       read_from: end
   sinks:
     to_clickhouse:
