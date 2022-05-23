@@ -21,18 +21,18 @@
       ansible.builtin.service:
         name: clickhouse-server
         state: restarted
-  pre_tasks:
-    - name: FireWall Clickhouse | Разрешим 8123 порт
-      become: true
-      ansible.posix.firewalld:
-        port: 8123/tcp
-        permanent: true
-        state: enabled
-    - name: FireWall Clickhouse | Перезапустим service firewalld
-      become: true
-      ansible.builtin.service:
-        name: firewalld
-        state: restarted
+  # pre_tasks:
+  #   - name: FireWall Clickhouse | Разрешим 8123 порт
+  #     become: true
+  #     ansible.posix.firewalld:
+  #       port: 8123-9000/tcp
+  #       permanent: true
+  #       state: enabled
+  #   - name: FireWall Clickhouse | Перезапустим service firewalld
+  #     become: true
+  #     ansible.builtin.service:
+  #       name: firewalld
+  #       state: restarted
   tasks:
     - block:
         - name: Clickhouse | Get clickhouse distrib
@@ -87,12 +87,12 @@
       register: create_table
       failed_when: create_table.rc != 0 and create_table.rc !=57 # table already exists
       changed_when: create_table.rc == 0
-    - name: Clickhouse | General config
-      become: true
-      ansible.builtin.template:
-        src: templates/clickhouse.xml.j2
-        dest: /etc/clickhouse-server/config.xml
-        mode: 0644
+    # - name: Clickhouse | General config
+    #   become: true
+    #   ansible.builtin.template:
+    #     src: templates/clickhouse.xml.j2
+    #     dest: /etc/clickhouse-server/config.xml
+    #     mode: 0644
       notify: Start clickhouse service
 
 - name: Install Vector
@@ -129,7 +129,7 @@
       user:
         name: vector
         groups: systemd-journal
-        append: true       
+        append: true
     - name: Vector | Update vector config
       become: true
       ansible.builtin.lineinfile:
@@ -171,22 +171,21 @@
         name: nginx
         state: present
       notify: Start nginx
-    - name: 
     - name: Nginx | Create general config
       ansible.builtin.template:
         src: templates/nginx.conf.j2
         dest: /etc/nginx/nginx.conf
         mode: 0644
       notify: Reload nginx
-    - name: Nginx | Разрешим 80 порт
-      ansible.posix.firewalld:
-        service: http
-        permanent: true
-        state: enabled
-    - name: Nginx | Перезапустим service firewalld на всех узлах
-      ansible.builtin.service:
-        name: firewalld
-        state: restarted
+    # - name: Nginx | Разрешим 80 порт
+    #   ansible.posix.firewalld:
+    #     service: http
+    #     permanent: true
+    #     state: enabled
+    # - name: Nginx | Перезапустим service firewalld на всех узлах
+    #   ansible.builtin.service:
+    #     name: firewalld
+    #     state: restarted
 
 - name: Install LightHouse
   hosts: lighthouse

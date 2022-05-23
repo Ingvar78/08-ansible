@@ -8,30 +8,16 @@ Apply complete! Resources: 3 added, 0 changed, 1 destroyed.
 
 ```bash
 
-yandex_vpc_subnet.vpcsubnet: Creation complete after 1s [id=e9b3bsugu0e62p21a76o]
-yandex_compute_instance.vm["lighthouse"]: Creating...
-yandex_compute_instance.vm["clickhouse"]: Creating...
-yandex_compute_instance.vm["vector"]: Creating...
-yandex_compute_instance.vm["lighthouse"]: Still creating... [10s elapsed]
-yandex_compute_instance.vm["vector"]: Still creating... [10s elapsed]
-yandex_compute_instance.vm["clickhouse"]: Still creating... [10s elapsed]
-yandex_compute_instance.vm["clickhouse"]: Still creating... [20s elapsed]
-yandex_compute_instance.vm["lighthouse"]: Still creating... [20s elapsed]
-yandex_compute_instance.vm["vector"]: Still creating... [20s elapsed]
-yandex_compute_instance.vm["vector"]: Creation complete after 21s [id=fhma74id6hk63tlu3n9j]
-yandex_compute_instance.vm["clickhouse"]: Creation complete after 24s [id=fhm7ssj5svnbjadfmc9b]
-yandex_compute_instance.vm["lighthouse"]: Creation complete after 24s [id=fhmkcb53t5l7ethjqac3]
-
 Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Outputs:
 
 internal_ip = {
   "clickhouse" = tolist([
-    "10.2.0.22",
+    "10.2.0.15",
   ])
   "lighthouse" = tolist([
-    "10.2.0.21",
+    "10.2.0.29",
   ])
   "vector" = tolist([
     "10.2.0.33",
@@ -39,22 +25,22 @@ internal_ip = {
 }
 nat_ip = {
   "clickhouse" = tolist([
-    "51.250.69.253",
+    "51.250.81.196",
   ])
   "lighthouse" = tolist([
-    "51.250.88.183",
+    "51.250.92.217",
   ])
   "vector" = tolist([
-    "51.250.64.213",
+    "51.250.91.178",
   ])
 }
-iva@c9:~/Documents/Terraform $ yc compute instance list
+iva@c9:~/Documents/08-ansible/08-3/src/ansible  (08.3 *)$ yc compute instance list
 +----------------------+---------------+---------------+---------+---------------+-------------+
 |          ID          |     NAME      |    ZONE ID    | STATUS  |  EXTERNAL IP  | INTERNAL IP |
 +----------------------+---------------+---------------+---------+---------------+-------------+
-| fhm7ssj5svnbjadfmc9b | c8-clickhouse | ru-central1-a | RUNNING | 51.250.69.253 | 10.2.0.22   |
-| fhma74id6hk63tlu3n9j | c8-vector     | ru-central1-a | RUNNING | 51.250.64.213 | 10.2.0.33   |
-| fhmkcb53t5l7ethjqac3 | c8-lighthouse | ru-central1-a | RUNNING | 51.250.88.183 | 10.2.0.21   |
+| fhmdefotau0ebqrpsnno | c8-vector     | ru-central1-a | RUNNING | 51.250.91.178 | 10.2.0.33   |
+| fhmk82molcahius53o7r | c8-lighthouse | ru-central1-a | RUNNING | 51.250.92.217 | 10.2.0.29   |
+| fhms00965i098mr4b4sg | c8-clickhouse | ru-central1-a | RUNNING | 51.250.81.196 | 10.2.0.15   |
 +----------------------+---------------+---------------+---------+---------------+-------------+
 ```
 
@@ -73,8 +59,14 @@ iva@c9:~/Documents/Terraform $ yc compute instance list
 
 ---
 
-### Как оформить ДЗ?
+### Порядок выполнения playbook
 
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
+```bash
+va@c9:~/Documents/08-ansible/08-3/src/ansible  (08.3 *)$ ansible-lint 
+WARNING: PATH altered to include /usr/bin
+
+```
+
 
 ---
+
