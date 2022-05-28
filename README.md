@@ -10,13 +10,13 @@
 
 ## Модуль 8. Система управления конфигурациями
 
-8.1. [Введение в Ansible](./08-1)
+8.1. [x] [Введение в Ansible](./08-1)
 
-8.2. [Работа с Playbook](./08-2)
+8.2. [x] [Работа с Playbook](./08-2)
 
-8.3. [Использование YandexCloud](./08-ansible-03-yandex)
+8.3. [] [Использование YandexCloud](./08-ansible-03-yandex)
 
-8.4. [Работа с Roles](./08-ansible-04-role)
+8.4. [] [Работа с Roles](./08-ansible-04-role)
 
 8.5. [Тестирование Roles](./08-ansible-05-testing)
 
